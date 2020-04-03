@@ -34,14 +34,14 @@ public class HandEmulator : MonoBehaviour
             trackedRoot.position = handAnchor.position;
             trackedRoot.rotation = handAnchor.rotation;
 
-            if (data.IsDataValid && data.IsDataHighConfidence)
+            for (var i = 0; i < trackedBones.Length; ++i)
             {
-                for (var i = 0; i < trackedBones.Length; ++i)
-                {
-                    var trackedBone = trackedBones[i];
-                    var physicsBone = physicsBones[i];
-                    var meshBone = meshBones[i];
+                var trackedBone = trackedBones[i];
+                var physicsBone = physicsBones[i];
+                var meshBone = meshBones[i];
 
+                if (data.IsDataValid && data.IsDataHighConfidence)
+                {
                     if (trackedBone != null)
                     {
                         trackedBone.localRotation = data.BoneRotations[i].FromFlippedXQuatf();
@@ -61,16 +61,16 @@ public class HandEmulator : MonoBehaviour
 
                             Vector3 boneVelocity = (trackedBone.position - previousPositions[i]) / Time.deltaTime;
                             physicsBone.velocity = boneVelocity;
-
-                            if (meshBone != null)
-                            {
-                                meshBone.position = physicsBone.transform.position;
-                                meshBone.rotation = physicsBone.transform.rotation;
-                            }
                         }
-                    }
 
-                    previousPositions[i] = trackedBone.position;
+                        previousPositions[i] = trackedBone.position;
+                    }
+                }
+
+                if (meshBone != null && physicsBone != null)
+                {
+                    meshBone.position = physicsBone.transform.position;
+                    meshBone.rotation = physicsBone.transform.rotation;
                 }
             }
         }
