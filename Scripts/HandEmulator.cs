@@ -9,12 +9,7 @@ public class HandEmulator : MonoBehaviour
     public Transform handAnchor;
 
     public Transform trackedRoot;
-    public Transform[] trackedBones;
-    public PhysicsTransform[] physicsBones;
-    public Transform[] meshBones;
-
-    private Vector3[] previousPositions;
-    private Quaternion[] cachedRotations;
+    public BoneParts[] bones;
 
     [SerializeField]
     private OVRSkeleton.IOVRSkeletonDataProvider _dataProvider;
@@ -34,43 +29,41 @@ public class HandEmulator : MonoBehaviour
             trackedRoot.position = handAnchor.position;
             trackedRoot.rotation = handAnchor.rotation;
 
-            for (var i = 0; i < trackedBones.Length; ++i)
+            for (var i = 0; i < bones.Length; ++i)
             {
-                var trackedBone = trackedBones[i];
-                var physicsBone = physicsBones[i];
-                var meshBone = meshBones[i];
+                var currentBone = bones[i];
 
                 if (data.IsDataValid && data.IsDataHighConfidence)
                 {
-                    if (trackedBone != null)
+                    if (currentBone.tracked != null)
                     {
-                        trackedBone.localRotation = data.BoneRotations[i].FromFlippedXQuatf();
+                        currentBone.tracked.localRotation = data.BoneRotations[i].FromFlippedXQuatf();
                         if (i == (int)OVRSkeleton.BoneId.Hand_WristRoot)
-                            trackedBone.localRotation *= wristFixupRotation;
+                            currentBone.tracked.localRotation *= wristFixupRotation;
 
-                        if (physicsBone != null)
+                        if (currentBone.physics != null)
                         {
                             if (i != (int)OVRSkeleton.BoneId.Hand_WristRoot)
                             {
-                                var joint = physicsBone.joint;
-                                joint.SetTargetRotation(trackedBone.localRotation, cachedRotations[i]);
+                                var joint = currentBone.joint;
+                                joint.SetTargetRotation(currentBone.tracked.localRotation, currentBone.cachedRotation);
                             }
 
-                            physicsBone.position = trackedBone.position;
-                            physicsBone.rotation = trackedBone.rotation; //Need to keep this for the wrists
+                            currentBone.physics.position = currentBone.tracked.position;
+                            currentBone.physics.rotation = currentBone.tracked.rotation; //Need to keep this for the wrists
 
-                            Vector3 boneVelocity = (trackedBone.position - previousPositions[i]) / Time.deltaTime;
-                            physicsBone.velocity = boneVelocity;
+                            Vector3 boneVelocity = (currentBone.tracked.position - currentBone.previousPosition) / Time.deltaTime;
+                            currentBone.physics.velocity = boneVelocity;
                         }
 
-                        previousPositions[i] = trackedBone.position;
+                        currentBone.previousPosition = currentBone.tracked.position;
                     }
                 }
 
-                if (meshBone != null && physicsBone != null)
+                if (currentBone.mesh != null && currentBone.physics != null)
                 {
-                    meshBone.position = physicsBone.transform.position;
-                    meshBone.rotation = physicsBone.transform.rotation;
+                    currentBone.mesh.position = currentBone.physics.transform.position;
+                    currentBone.mesh.rotation = currentBone.physics.transform.rotation;
                 }
             }
         }
@@ -78,25 +71,28 @@ public class HandEmulator : MonoBehaviour
 
     private void InitPreviousPositions()
     {
-        previousPositions = new Vector3[trackedBones.Length];
-        for (int i = 0; i < trackedBones.Length; i++)
-            if (trackedBones[i] != null)
-                previousPositions[i] = trackedBones[i].position;
+        for (int i = 0; i < bones.Length; i++)
+            if (bones[i].tracked != null)
+                bones[i].previousPosition = bones[i].tracked.position;
     }
     private void CacheRotations()
     {
-        cachedRotations = new Quaternion[trackedBones.Length];
-        for (int i = 0; i < trackedBones.Length; i++)
-            if (trackedBones[i] != null)
-                cachedRotations[i] = trackedBones[i].localRotation;
+        for (int i = 0; i < bones.Length; i++)
+            if (bones[i].tracked != null)
+                bones[i].cachedRotation = bones[i].tracked.localRotation;
     }
 }
 
 [Serializable]
-public class PhysicsBone
+public class BoneParts
 {
-    [SerializeField]
-    public Transform anchor;
-    [SerializeField]
-    public PhysicsTransform bone;
+    public Transform mesh;
+    public PhysicsTransform physics;
+    public Transform tracked;
+    public ConfigurableJoint joint;
+
+    [HideInInspector]
+    public Vector3 previousPosition;
+    [HideInInspector]
+    public Quaternion cachedRotation;
 }

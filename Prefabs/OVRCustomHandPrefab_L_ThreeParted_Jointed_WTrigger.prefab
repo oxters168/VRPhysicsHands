@@ -51,9 +51,6 @@ MonoBehaviour:
   parent: {fileID: 801043880098643657}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 6442203904339908090}
   counteractGravity: 1
@@ -88,10 +85,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -344,9 +345,6 @@ MonoBehaviour:
   parent: {fileID: 2301791957038757479}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 300988402401645260}
   counteractGravity: 1
@@ -381,10 +379,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -672,9 +674,6 @@ MonoBehaviour:
   parent: {fileID: 8340613317927272959}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 5663163156209032416}
   counteractGravity: 1
@@ -709,10 +708,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -1025,9 +1028,6 @@ MonoBehaviour:
   parent: {fileID: 7933536297468236731}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 3782140757738467840}
   counteractGravity: 1
@@ -1062,10 +1062,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -1318,9 +1322,6 @@ MonoBehaviour:
   parent: {fileID: 1208327635385246149}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 7839859884257146311}
   counteractGravity: 1
@@ -1355,10 +1356,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -1644,9 +1649,6 @@ MonoBehaviour:
   parent: {fileID: 9142306809652784626}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 6813327944670886046}
   counteractGravity: 1
@@ -1681,10 +1683,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -1877,9 +1883,6 @@ MonoBehaviour:
   parent: {fileID: 8340613317927272959}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 6656765456064791695}
   counteractGravity: 1
@@ -1914,10 +1917,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -2109,9 +2116,6 @@ MonoBehaviour:
   parent: {fileID: 0}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.1
-  maxAnchorDistance: 1
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 0}
   counteractGravity: 1
@@ -2146,10 +2150,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 1
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -2654,9 +2662,6 @@ MonoBehaviour:
   parent: {fileID: 8802648148192919658}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 5559236178200583325}
   counteractGravity: 1
@@ -2691,10 +2696,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -3160,9 +3169,6 @@ MonoBehaviour:
   parent: {fileID: 8206482534190541634}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 2641641990321661134}
   counteractGravity: 1
@@ -3197,10 +3203,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -3551,9 +3561,6 @@ MonoBehaviour:
   parent: {fileID: 3210098895529769331}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 709029781793681720}
   counteractGravity: 1
@@ -3588,10 +3595,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -4030,9 +4041,6 @@ MonoBehaviour:
   parent: {fileID: 8340613317927272959}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 3563214206941089298}
   counteractGravity: 1
@@ -4067,10 +4075,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -4283,7 +4295,7 @@ GameObject:
   - component: {fileID: 5342916852622132994}
   - component: {fileID: 5433096005288358064}
   m_Layer: 8
-  m_Name: OculusHand_L
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6591,81 +6603,151 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handAnchor: {fileID: 0}
   trackedRoot: {fileID: 5539180797117379775}
-  trackedBones:
-  - {fileID: 397693886801185391}
-  - {fileID: 7083182615449202301}
-  - {fileID: 5687584520218459462}
-  - {fileID: 5939540196018450311}
-  - {fileID: 7396937931877650056}
-  - {fileID: 2312208244259443382}
-  - {fileID: 7263246332621752379}
-  - {fileID: 7983686034316892163}
-  - {fileID: 4037813633035595467}
-  - {fileID: 3346835744382053931}
-  - {fileID: 5478076133941847111}
-  - {fileID: 3715484033605191420}
-  - {fileID: 3787936124886249015}
-  - {fileID: 6009594119168858712}
-  - {fileID: 8836705327745910316}
-  - {fileID: 8324722678844241357}
-  - {fileID: 4241198727924010585}
-  - {fileID: 2959020028514503715}
-  - {fileID: 550442547003028864}
-  - {fileID: 4459011458719169266}
-  - {fileID: 8333944657458541007}
-  - {fileID: 8001614875743333529}
-  - {fileID: 828386148681262721}
-  - {fileID: 4252996509023994853}
-  physicsBones:
-  - {fileID: 8870843864990481527}
-  - {fileID: 0}
-  - {fileID: 3384048981976527247}
-  - {fileID: 1103467009614596016}
-  - {fileID: 5358879963852797481}
-  - {fileID: 6870839579308664503}
-  - {fileID: 7546718702061955960}
-  - {fileID: 2372842911481476030}
-  - {fileID: 3386900519103604468}
-  - {fileID: 6547900841046888396}
-  - {fileID: 3839894880617380540}
-  - {fileID: 6423885874796019986}
-  - {fileID: 6432869149548629625}
-  - {fileID: 4571953349631650354}
-  - {fileID: 1802087836026970884}
-  - {fileID: 8140997141074325798}
-  - {fileID: 2879611133765001778}
-  - {fileID: 231055048941390667}
-  - {fileID: 3875298171763675069}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  meshBones:
-  - {fileID: 5342654918683982664}
-  - {fileID: 5342575659313767666}
-  - {fileID: 5342916849854260620}
-  - {fileID: 5342441428304246080}
-  - {fileID: 5342640874557574500}
-  - {fileID: 5342670775830939034}
-  - {fileID: 5348603566420695588}
-  - {fileID: 5348900563536447094}
-  - {fileID: 5342617330970694266}
-  - {fileID: 5342627131027451750}
-  - {fileID: 5349054801528632450}
-  - {fileID: 5342512984738144774}
-  - {fileID: 5342830036388936900}
-  - {fileID: 5342947750760519126}
-  - {fileID: 5349011476374704000}
-  - {fileID: 5342653547761874444}
-  - {fileID: 5348983549891169936}
-  - {fileID: 5342867786449834224}
-  - {fileID: 5348647941977624012}
-  - {fileID: 5349017870130850844}
-  - {fileID: 5342886863132501920}
-  - {fileID: 5342584525830689132}
-  - {fileID: 5342829452023111744}
-  - {fileID: 5349108304423899926}
+  bones:
+  - mesh: {fileID: 5342654918683982664}
+    physics: {fileID: 8870843864990481527}
+    tracked: {fileID: 397693886801185391}
+    joint: {fileID: 0}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342575659313767666}
+    physics: {fileID: 0}
+    tracked: {fileID: 7083182615449202301}
+    joint: {fileID: 0}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342916849854260620}
+    physics: {fileID: 3384048981976527247}
+    tracked: {fileID: 5687584520218459462}
+    joint: {fileID: 6656765456064791695}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342441428304246080}
+    physics: {fileID: 1103467009614596016}
+    tracked: {fileID: 5939540196018450311}
+    joint: {fileID: 2641641990321661134}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342640874557574500}
+    physics: {fileID: 5358879963852797481}
+    tracked: {fileID: 7396937931877650056}
+    joint: {fileID: 5448182304273224059}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342670775830939034}
+    physics: {fileID: 6870839579308664503}
+    tracked: {fileID: 2312208244259443382}
+    joint: {fileID: 2626267742937361288}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5348603566420695588}
+    physics: {fileID: 7546718702061955960}
+    tracked: {fileID: 7263246332621752379}
+    joint: {fileID: 6892819405174702124}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5348900563536447094}
+    physics: {fileID: 2372842911481476030}
+    tracked: {fileID: 7983686034316892163}
+    joint: {fileID: 8789169066978447952}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342617330970694266}
+    physics: {fileID: 3386900519103604468}
+    tracked: {fileID: 4037813633035595467}
+    joint: {fileID: 5627087680479043947}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342627131027451750}
+    physics: {fileID: 6547900841046888396}
+    tracked: {fileID: 3346835744382053931}
+    joint: {fileID: 3563214206941089298}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5349054801528632450}
+    physics: {fileID: 3839894880617380540}
+    tracked: {fileID: 5478076133941847111}
+    joint: {fileID: 7839859884257146311}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342512984738144774}
+    physics: {fileID: 6423885874796019986}
+    tracked: {fileID: 3715484033605191420}
+    joint: {fileID: 3782140757738467840}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342830036388936900}
+    physics: {fileID: 6432869149548629625}
+    tracked: {fileID: 3787936124886249015}
+    joint: {fileID: 9056164984647040481}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342947750760519126}
+    physics: {fileID: 4571953349631650354}
+    tracked: {fileID: 6009594119168858712}
+    joint: {fileID: 709029781793681720}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5349011476374704000}
+    physics: {fileID: 1802087836026970884}
+    tracked: {fileID: 8836705327745910316}
+    joint: {fileID: 300988402401645260}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342653547761874444}
+    physics: {fileID: 8140997141074325798}
+    tracked: {fileID: 8324722678844241357}
+    joint: {fileID: 5663163156209032416}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5348983549891169936}
+    physics: {fileID: 2879611133765001778}
+    tracked: {fileID: 4241198727924010585}
+    joint: {fileID: 6813327944670886046}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342867786449834224}
+    physics: {fileID: 231055048941390667}
+    tracked: {fileID: 2959020028514503715}
+    joint: {fileID: 6442203904339908090}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5348647941977624012}
+    physics: {fileID: 3875298171763675069}
+    tracked: {fileID: 550442547003028864}
+    joint: {fileID: 5559236178200583325}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5349017870130850844}
+    physics: {fileID: 0}
+    tracked: {fileID: 4459011458719169266}
+    joint: {fileID: 0}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342886863132501920}
+    physics: {fileID: 0}
+    tracked: {fileID: 8333944657458541007}
+    joint: {fileID: 0}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342584525830689132}
+    physics: {fileID: 0}
+    tracked: {fileID: 8001614875743333529}
+    joint: {fileID: 0}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5342829452023111744}
+    physics: {fileID: 0}
+    tracked: {fileID: 828386148681262721}
+    joint: {fileID: 0}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
+  - mesh: {fileID: 5349108304423899926}
+    physics: {fileID: 0}
+    tracked: {fileID: 4252996509023994853}
+    joint: {fileID: 0}
+    previousPosition: {x: 0, y: 0, z: 0}
+    cachedRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5346832228990251324
 GameObject:
   m_ObjectHideFlags: 0
@@ -7151,9 +7233,6 @@ MonoBehaviour:
   parent: {fileID: 4228263104066196365}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 5627087680479043947}
   counteractGravity: 1
@@ -7188,10 +7267,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -7564,9 +7647,6 @@ MonoBehaviour:
   parent: {fileID: 5899482365291375116}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 5448182304273224059}
   counteractGravity: 1
@@ -7601,10 +7681,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -8035,9 +8119,6 @@ MonoBehaviour:
   parent: {fileID: 8340613317927272959}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 6892819405174702124}
   counteractGravity: 1
@@ -8072,10 +8153,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -8481,9 +8566,6 @@ MonoBehaviour:
   parent: {fileID: 8340613317927272959}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 9056164984647040481}
   counteractGravity: 1
@@ -8518,10 +8600,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -8774,9 +8860,6 @@ MonoBehaviour:
   parent: {fileID: 4223155053509621479}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 2626267742937361288}
   counteractGravity: 1
@@ -8811,10 +8894,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
@@ -9135,9 +9222,6 @@ MonoBehaviour:
   parent: {fileID: 5792028219329304757}
   anchorPositionPercent: 0
   anchorRotationPercent: 0
-  anchorByDistance: 0
-  minAnchorDistance: 0.01
-  maxAnchorDistance: 0.04
   localLinearLimit: 3.4028235e+38
   joint: {fileID: 8789169066978447952}
   counteractGravity: 1
@@ -9172,10 +9256,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   clampStrength: 1
+  lockedWorldDirections: 0
+  lockedLocalDirections: 0
+  minimumSpeedToBlock: 0.1
   striveForOrientation: 0
   rotation: {x: 0, y: 0, z: 0, w: 1}
   frequency: 10
   damping: 1
+  lockRotation: 0
   striveForVelocity: 1
   velocity: {x: 0, y: 0, z: 0}
   velStrength: 1
