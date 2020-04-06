@@ -18,6 +18,9 @@ public class HandEmulator : MonoBehaviour
     {
         _dataProvider = GetComponent<OVRSkeleton.IOVRSkeletonDataProvider>();
         InitPreviousPositions();
+    }
+    private void OnEnable()
+    {
         CacheRotations();
     }
     void Update()
