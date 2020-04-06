@@ -18,9 +18,17 @@ public class HandEmulator : MonoBehaviour
     {
         _dataProvider = GetComponent<OVRSkeleton.IOVRSkeletonDataProvider>();
         InitPreviousPositions();
+        CacheRotations();
+    }
+    private void OnDisable()
+    {
+        //This needs to be done so that any dislocations occuring on the hands caused by outside forces don't persist when re-enabled
+        //Doing this causes the hand to sometimes be partly inside an object when enabled, need to find a fix
+        SnapToTracked();
     }
     private void OnEnable()
     {
+        //We need to do this since configurable joints reset their target rotation's 'default orientation' when deactivated then reactivated apparently
         CacheRotations();
     }
     void Update()
@@ -60,6 +68,9 @@ public class HandEmulator : MonoBehaviour
                         }
 
                         currentBone.previousPosition = currentBone.tracked.position;
+
+                        currentBone.previousTrackedRotation = currentBone.tracked.localRotation;
+                        currentBone.hasBeenTracked = true;
                     }
                 }
 
@@ -84,6 +95,32 @@ public class HandEmulator : MonoBehaviour
             if (bones[i].tracked != null)
                 bones[i].cachedRotation = bones[i].tracked.localRotation;
     }
+    private void SnapToTracked()
+    {
+        trackedRoot.position = handAnchor.position;
+        trackedRoot.rotation = handAnchor.rotation;
+
+        for (var i = 0; i < bones.Length; ++i)
+        {
+            var currentBone = bones[i];
+
+            if (currentBone.hasBeenTracked)
+            {
+                if (currentBone.tracked != null)
+                    currentBone.tracked.localRotation = currentBone.previousTrackedRotation;
+                if (currentBone.mesh != null)
+                {
+                    currentBone.mesh.position = currentBone.tracked.position;
+                    currentBone.mesh.rotation = currentBone.tracked.rotation;
+                }
+                if (currentBone.physics != null)
+                {
+                    currentBone.physics.transform.position = currentBone.tracked.position;
+                    currentBone.physics.transform.rotation = currentBone.tracked.rotation;
+                }
+            }
+        }
+    }
 }
 
 [Serializable]
@@ -98,4 +135,8 @@ public class BoneParts
     public Vector3 previousPosition;
     [HideInInspector]
     public Quaternion cachedRotation;
+    [HideInInspector]
+    public Quaternion previousTrackedRotation;
+    [HideInInspector]
+    public bool hasBeenTracked;
 }
