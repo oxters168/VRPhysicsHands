@@ -97,9 +97,11 @@ public class HandEmulator : MonoBehaviour
     }
     private void SnapToTracked()
     {
-        trackedRoot.position = handAnchor.position;
-        trackedRoot.rotation = handAnchor.rotation;
-
+        if (trackedRoot != null && handAnchor != null)
+        {
+            trackedRoot.position = handAnchor.position;
+            trackedRoot.rotation = handAnchor.rotation;
+        }
         for (var i = 0; i < bones.Length; ++i)
         {
             var currentBone = bones[i];
