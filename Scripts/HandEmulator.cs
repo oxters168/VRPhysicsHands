@@ -14,6 +14,10 @@ public class HandEmulator : MonoBehaviour
     [SerializeField]
     private OVRSkeleton.IOVRSkeletonDataProvider _dataProvider;
 
+    [Tooltip("How far the wrist can be before snapping the whole hand back in place")]
+    public float maxOffsetValue = 0.1f;
+    private float wristOffset;
+
     void Awake()
     {
         _dataProvider = GetComponent<OVRSkeleton.IOVRSkeletonDataProvider>();
@@ -32,6 +36,13 @@ public class HandEmulator : MonoBehaviour
         CacheRotations();
     }
     void Update()
+    {
+        Track();
+        if (wristOffset > maxOffsetValue)
+            SnapToTracked();
+    }
+
+    private void Track()
     {
         if (_dataProvider != null)
         {
@@ -58,6 +69,7 @@ public class HandEmulator : MonoBehaviour
                             {
                                 var joint = currentBone.joint;
                                 joint.SetTargetRotation(currentBone.tracked.localRotation, currentBone.cachedRotation);
+                                wristOffset = Vector3.Distance(currentBone.physics.AffectedBody.position, currentBone.tracked.position);
                             }
 
                             currentBone.physics.position = currentBone.tracked.position;
