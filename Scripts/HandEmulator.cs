@@ -14,8 +14,13 @@ public class HandEmulator : MonoBehaviour
     [SerializeField]
     private OVRSkeleton.IOVRSkeletonDataProvider _dataProvider;
 
+    [Space(10), Tooltip("If set to true, will snap to tracked position and rotation when max positional offset reached")]
+    public bool resetOnPositionOffset;
     [Tooltip("How far the wrist can positionally in meters be before snapping the whole hand back in place")]
     public float maxPosOffsetValue = 2;
+    [Tooltip("If set to true, will snap to tracked position and rotation when max rotational offset reached")]
+    public bool resetOnRotationOffset;
+
     [Tooltip("How far the wrist can be rotationally in degrees before snapping the whole hand back in place")]
     public float maxRotOffsetValue = 45;
     private float wristPosOffset, wristRotOffset;
@@ -40,7 +45,7 @@ public class HandEmulator : MonoBehaviour
     void Update()
     {
         Track();
-        if (wristPosOffset > maxPosOffsetValue || wristRotOffset > maxRotOffsetValue)
+        if ((resetOnPositionOffset && wristPosOffset > maxPosOffsetValue) || (resetOnRotationOffset && wristRotOffset > maxRotOffsetValue))
             SnapToTracked();
     }
 
