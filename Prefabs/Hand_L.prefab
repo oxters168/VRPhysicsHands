@@ -1993,10 +1993,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 370937535605619699}
-  - component: {fileID: 333954710349703445}
   - component: {fileID: 690061918836381471}
   m_Layer: 8
-  m_Name: ManualHand_L
+  m_Name: Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2019,20 +2018,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &333954710349703445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374488653722213841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb7623a8f0b49cf4dbaa40aea4d4be64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HandType: 0
-  _pointerPoseRoot: {fileID: 0}
 --- !u!114 &690061918836381471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2088,6 +2073,7 @@ MonoBehaviour:
       value: 0
     - id: 18
       value: 0
+  handInterfaceObject: {fileID: 0}
   bones:
   - mesh: {fileID: 370527952405449321}
     physics: {fileID: 3754625625112563030}

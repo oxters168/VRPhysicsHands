@@ -6,8 +6,6 @@ namespace VRPhysicsHands
 {
     public class HandEmulator : MonoBehaviour
     {
-        private readonly Quaternion wristFixupRotation = new Quaternion(0.0f, 1.0f, 0.0f, 0.0f);
-
         public Transform handAnchor;
 
         public Transform trackedRoot;
@@ -25,6 +23,9 @@ namespace VRPhysicsHands
         private float wristPosOffset, wristRotOffset;
 
         [Space(10)]
+        [RequireInterface(typeof(IHandBoneManipulator))]
+        public GameObject handInterfaceObject;
+        private IHandBoneManipulator handInterface;
         public HandBoneValues boneRotationValues;
 
         [Space(10)]
@@ -32,6 +33,9 @@ namespace VRPhysicsHands
 
         void Awake()
         {
+            if (handInterfaceObject != null)
+                handInterface = handInterfaceObject.GetComponent<IHandBoneManipulator>();
+
             SaveStartRotations();
             InitPreviousPositions();
             CacheRotations();
@@ -49,6 +53,9 @@ namespace VRPhysicsHands
         }
         void Update()
         {
+            if (handInterface != null)
+                boneRotationValues = handInterface.GetValues();
+
             SetTracked();
             SetPhysics();
 
@@ -62,36 +69,33 @@ namespace VRPhysicsHands
             {
                 trackedRoot.position = handAnchor.position;
                 trackedRoot.rotation = handAnchor.rotation;
-
-                //bones[(int)BoneId.Hand_WristRoot].tracked.localRotation *= wristFixupRotation;
             }
 
-            if (boneRotationValues != null && boneRotationValues.bones.Length > 0)
+            if (boneRotationValues.bones != null && boneRotationValues.bones.Length > 0)
             {
                 var boneIds = (BoneId[])System.Enum.GetValues(typeof(BoneId));
-                FingerInfo[] fingerValues = new FingerInfo[]
+                for (int i = 0; i < boneIds.Length; i++)
                 {
-                    new FingerInfo() { enumStartIndex = 3, partCount = 4 },
-                    new FingerInfo() { enumStartIndex = 7, partCount = 3 },
-                    new FingerInfo() { enumStartIndex = 10, partCount = 3 },
-                    new FingerInfo() { enumStartIndex = 13, partCount = 3 },
-                    new FingerInfo() { enumStartIndex = 16, partCount = 4 }
-                };
-                for (int fingerIndex = 0; fingerIndex < fingerValues.Length; fingerIndex++)
-                {
-                    var currentFinger = fingerValues[fingerIndex];
-                    for (int boneIndex = 0; boneIndex < currentFinger.partCount; boneIndex++)
+                    var currentBoneId = boneIds[i];
+                    var bonesWithId = boneRotationValues.bones.Where((bone) => bone.id == currentBoneId);
+                    if (bonesWithId.Count() > 0)
                     {
-                        var currentBoneId = boneIds[currentFinger.enumStartIndex + boneIndex];
-                        var boneRotValue = boneRotationValues.bones.FirstOrDefault((bone) => bone.id == currentBoneId);
-                        if (boneRotValue != null)
+                        var currentBone = bones[(int)currentBoneId];
+                        var boneRotValue = bonesWithId.First();
+
+                        Quaternion localRotation;
+                        if (!boneRotValue.IsOrientation)
                         {
                             Vector3 rotationAxis = -Vector3.forward;
                             if (currentBoneId == BoneId.Hand_Thumb0)
                                 rotationAxis = -Vector3.up;
                             float currentAngle = boneRotValue.value * 90;
-                            bones[(int)currentBoneId].tracked.localRotation = Quaternion.AngleAxis(currentAngle, rotationAxis) * bones[(int)currentBoneId].startRotation;//Quaternion.AngleAxis(currentAngle, -bones[(int)currentBoneId].tracked.forward);
+                            localRotation = Quaternion.AngleAxis(currentAngle, rotationAxis) * currentBone.startRotation;
                         }
+                        else
+                            localRotation = boneRotValue.localRotation;
+
+                        currentBone.tracked.localRotation = localRotation;
                     }
                 }
             }
@@ -183,12 +187,6 @@ namespace VRPhysicsHands
                     }
                 }
             }
-        }
-
-        private struct FingerInfo
-        {
-            public int enumStartIndex;
-            public int partCount;
         }
     }
 }
