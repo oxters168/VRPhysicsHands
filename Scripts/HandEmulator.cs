@@ -25,7 +25,7 @@ namespace VRPhysicsHands
         [Space(10)]
         [RequireInterface(typeof(IHandBoneManipulator))]
         public GameObject handInterfaceObject;
-        private IHandBoneManipulator handInterface;
+        internal IHandBoneManipulator handInterface;
         public HandBoneValues boneRotationValues;
 
         [Space(10)]
