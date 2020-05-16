@@ -2037,43 +2037,77 @@ MonoBehaviour:
   maxPosOffsetValue: 2
   resetOnRotationOffset: 0
   maxRotOffsetValue: 45
+  handInterfaceObject: {fileID: 0}
   boneRotationValues:
     bones:
     - id: 2
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 3
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 4
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 5
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 6
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 7
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 8
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 9
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 10
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 11
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 12
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 13
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 14
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 15
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 16
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 17
       value: 0
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
     - id: 18
       value: 0
-  handInterfaceObject: {fileID: 0}
+      _isOrientation: 0
+      _localRotation: {x: 0, y: 0, z: 0, w: 0}
   bones:
   - mesh: {fileID: 370527952405449321}
     physics: {fileID: 3754625625112563030}
@@ -13818,6 +13852,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PalmStick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392292654230210453, guid: 5f618206cc0910f4381ada25d77897df,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1892275071943706468, guid: 5f618206cc0910f4381ada25d77897df,
         type: 3}

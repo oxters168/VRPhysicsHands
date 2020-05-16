@@ -7,18 +7,15 @@ namespace VRPhysicsHands
     {
         private readonly Quaternion wristFixupRotation = new Quaternion(0.0f, 1.0f, 0.0f, 0.0f);
 
+        private OVRSkeleton.IOVRSkeletonDataProvider DataProvider { get { if (_dataProvider == null) _dataProvider = GetComponent<OVRSkeleton.IOVRSkeletonDataProvider>(); return _dataProvider; } }
         [SerializeField]
         private OVRSkeleton.IOVRSkeletonDataProvider _dataProvider;
 
-        void Awake()
-        {
-            _dataProvider = GetComponent<OVRSkeleton.IOVRSkeletonDataProvider>();
-        }
         public HandBoneValues GetValues()
         {
             HandBoneValues providedData = default;
 
-            var data = _dataProvider.GetSkeletonPoseData();
+            var data = DataProvider.GetSkeletonPoseData();
             if (data.IsDataValid && data.IsDataHighConfidence)
             {
                 List<HandBoneValues.BoneRotValue> retrievedData = new List<HandBoneValues.BoneRotValue>();
