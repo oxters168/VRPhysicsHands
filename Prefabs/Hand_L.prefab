@@ -2130,6 +2130,9 @@ MonoBehaviour:
   resetOnRotationOffset: 0
   maxRotOffsetValue: 45
   handInterfaceObject: {fileID: 0}
+  flipTipRays: 0
+  tipCollisionDistance: 0.016
+  testFingers: 0
   boneRotationValues:
     bones:
     - id: 2

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityHelpers;
 using System.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace VRPhysicsHands
 {
@@ -26,6 +28,18 @@ namespace VRPhysicsHands
         [RequireInterface(typeof(IHandBoneManipulator))]
         public GameObject handInterfaceObject;
         internal IHandBoneManipulator handInterface;
+        [Tooltip("Flips the direction of the rays on the tips used for collision detection")]
+        /// <summary>
+        /// Flips the the direction of the rays on the tips used for collision detection
+        /// </summary>
+        public bool flipTipRays;
+        [Tooltip("The distance from the finger tips to test for collision before stopping finger rotation")]
+        /// <summary>
+        /// The distance from the finger tips to test for collision before stopping finger rotation
+        /// </summary>
+        public float tipCollisionDistance = 0.016f;
+        [Tooltip("Lets you manually change finger rotation values in editor if an interface is getting in the way")]
+        public bool testFingers;
         public HandBoneValues boneRotationValues;
 
         [Space(10)]
@@ -53,7 +67,7 @@ namespace VRPhysicsHands
         }
         void Update()
         {
-            if (handInterface != null)
+            if (handInterface != null && !testFingers)
                 boneRotationValues = handInterface.GetValues();
 
             SetTracked();
@@ -73,7 +87,9 @@ namespace VRPhysicsHands
 
             if (boneRotationValues.bones != null && boneRotationValues.bones.Length > 0)
             {
-                var boneIds = (BoneId[])System.Enum.GetValues(typeof(BoneId));
+                //string debugTips = "";
+                List<(BoneId, bool)> fingerTipTests = new List<(BoneId, bool)>(); //Adding this helps reduce the amount of raycasts done on each finger tip by around 3 times, since each finger has 3 or 4 bones
+                var boneIds = (BoneId[])Enum.GetValues(typeof(BoneId));
                 for (int i = 0; i < boneIds.Length; i++)
                 {
                     var currentBoneId = boneIds[i];
@@ -83,6 +99,7 @@ namespace VRPhysicsHands
                         var currentBone = bones[(int)currentBoneId];
                         var boneRotValue = bonesWithId.First();
 
+                        #region Getting the rotation value from given hand bone values
                         Quaternion localRotation;
                         if (!boneRotValue.IsOrientation)
                         {
@@ -94,10 +111,51 @@ namespace VRPhysicsHands
                         }
                         else
                             localRotation = boneRotValue.localRotation;
+                        #endregion
+
+                        #region Adjusting rotation based on collision (less rotation toward collider if tip colliding)
+                        BoneId currentFingerTip = GetTip(currentBoneId);
+                        if (currentFingerTip != BoneId.Invalid)
+                        {
+                            var fingerTipTransform = bones[(int)currentFingerTip].mesh;
+                            var fingerTipRay = new Ray(fingerTipTransform.position, fingerTipTransform.up * (flipTipRays ? -1 : 1));
+
+                            //debugTips += currentBoneId + " => " + currentFingerTip + "\n";
+                            (BoneId, bool) fingerTipTest;
+                            var matchingTests = fingerTipTests.Where(currentTest => { return currentTest.Item1 == currentFingerTip; });
+                            if (matchingTests.Count() <= 0)
+                            {
+                                bool tipCollided = Physics.Raycast(fingerTipRay, tipCollisionDistance);
+                                fingerTipTest = (currentFingerTip, tipCollided);
+                                fingerTipTests.Add(fingerTipTest);
+                                Debug.DrawRay(fingerTipRay.origin, fingerTipRay.direction * tipCollisionDistance, tipCollided ? Color.green : Color.red);
+                            }
+                            else
+                                fingerTipTest = matchingTests.First();
+
+                            if (fingerTipTest.Item2)
+                            {
+                                //Since we've collided with something, we now need to test which way the
+                                //finger is rotating in. If it's rotating towards the collider, stop rotation.
+                                //Or else keep the rotation as is.
+                                
+                                Quaternion deltaRotation = currentBone.tracked.localRotation * Quaternion.Inverse(localRotation);
+                                float angle;
+                                Vector3 axis;
+                                deltaRotation.ToAngleAxis(out angle, out axis);
+                                axis = currentBone.tracked.TransformDirection(axis);
+                                Debug.DrawRay(currentBone.mesh.position, axis * angle, Color.white);
+                                Debug.DrawRay(currentBone.mesh.position, currentBone.tracked.forward, Color.yellow);
+                                if (Vector3.Dot(currentBone.tracked.forward, axis) > 0)
+                                    localRotation = currentBone.tracked.localRotation;
+                            }
+                        }
+                        #endregion
 
                         currentBone.tracked.localRotation = localRotation;
                     }
                 }
+                //Debug.Log(debugTips);
             }
         }
         private void SetPhysics()
@@ -140,6 +198,29 @@ namespace VRPhysicsHands
                     currentBone.mesh.rotation = currentBone.physics.transform.rotation;
                 }
             }
+        }
+
+        /// <summary>
+        /// Finds the bone id of the tip of the given bone id's finger
+        /// </summary>
+        /// <param name="currentBoneId">A bone id on a finger</param>
+        /// <returns>The bone id of the tip of the given bone id (unless the given bone id is not from a finger, then returns invalid)</returns>
+        private static BoneId GetTip(BoneId currentBoneId)
+        {
+            BoneId theTip = BoneId.Invalid;
+            if (currentBoneId != BoneId.Hand_End && currentBoneId != BoneId.Hand_ForearmStub && currentBoneId != BoneId.Hand_MaxSkinnable && currentBoneId != BoneId.Hand_Start && currentBoneId != BoneId.Hand_WristRoot && currentBoneId != BoneId.Invalid && currentBoneId != BoneId.Max)
+            {
+                //var boneNames = Enum.GetNames(typeof(BoneId));
+                string currentBoneName = currentBoneId.ToString();
+                if (!currentBoneName.Contains("Tip"))
+                {
+                    string tipBoneName = currentBoneName.Substring(0, currentBoneName.Length - 1) + "Tip";
+                    theTip = (BoneId)Enum.Parse(typeof(BoneId), tipBoneName);
+                }
+                else
+                    theTip = currentBoneId;
+            }
+            return theTip;
         }
 
         private void SaveStartRotations()

@@ -28,6 +28,7 @@ namespace VRPhysicsHands
                         retrievedData.Add(new HandBoneValues.BoneRotValue()
                         {
                             id = currentBoneId,
+                            //localRotation = data.BoneRotations[(int)currentBoneId].FromFlippedZQuatf() //Maybe this or the FromQuatf function can be used for blender models?
                             localRotation = data.BoneRotations[(int)currentBoneId].FromFlippedXQuatf()
                                 * ((currentBoneId == BoneId.Hand_WristRoot) ? wristFixupRotation : Quaternion.identity)
                         });
