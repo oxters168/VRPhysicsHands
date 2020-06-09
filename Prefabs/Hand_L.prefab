@@ -2132,6 +2132,8 @@ MonoBehaviour:
   handInterfaceObject: {fileID: 0}
   flipTipRays: 0
   tipCollisionDistance: 0.016
+  lerpFingers: 0
+  fingersLerpValue: 5
   testFingers: 0
   boneRotationValues:
     bones:

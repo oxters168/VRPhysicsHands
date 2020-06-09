@@ -105,8 +105,11 @@ MonoBehaviour:
   wristEuler: {x: -90, y: -90, z: 0}
   indexFromNearTouch: 1
   pinchOnClose: 1
+  lerpThumb: 1
   thumbLerp: 5
+  lerpIndex: 1
   indexLerp: 5
+  lerpGrip: 1
   gripLerp: 5
 --- !u!114 &6719790652806965122
 MonoBehaviour:
@@ -188,7 +191,7 @@ PrefabInstance:
     - target: {fileID: 4421906177706565046, guid: ab041c69039e0f74281f0ae417e26d8f,
         type: 3}
       propertyPath: m_Name
-      value: Oculus_Hand_R Variant
+      value: Oculus_Hand_R
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab041c69039e0f74281f0ae417e26d8f, type: 3}

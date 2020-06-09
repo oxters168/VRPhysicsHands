@@ -17,8 +17,11 @@ namespace VRPhysicsHands
         public bool pinchOnClose;
 
         [Space(10)]
+        public bool lerpThumb = true;
         public float thumbLerp = 5;
+        public bool lerpIndex = true;
         public float indexLerp = 5;
+        public bool lerpGrip = true;
         public float gripLerp = 5;
         private float previousThumbValue;
         private float previousIndexValue;
@@ -58,13 +61,21 @@ namespace VRPhysicsHands
             #endregion
 
             #region Lerp values
-            thumbValue = Mathf.Lerp(previousThumbValue, thumbValue, Time.deltaTime * thumbLerp);
-            indexValue = Mathf.Lerp(previousIndexValue, indexValue, Time.deltaTime * indexLerp);
-            gripValue = Mathf.Lerp(previousGripValue, gripValue, Time.deltaTime * gripLerp);
-
-            previousThumbValue = thumbValue;
-            previousIndexValue = indexValue;
-            previousGripValue = gripValue;
+            if (lerpThumb)
+            {
+                thumbValue = Mathf.Lerp(previousThumbValue, thumbValue, Time.deltaTime * thumbLerp);
+                previousThumbValue = thumbValue;
+            }
+            if (lerpIndex)
+            {
+                indexValue = Mathf.Lerp(previousIndexValue, indexValue, Time.deltaTime * indexLerp);
+                previousIndexValue = indexValue;
+            }
+            if (lerpGrip)
+            {
+                gripValue = Mathf.Lerp(previousGripValue, gripValue, Time.deltaTime * gripLerp);
+                previousGripValue = gripValue;
+            }
             #endregion
             
             #region Spread values across knuckles

@@ -133,25 +133,39 @@ namespace VRPhysicsHands
                             else
                                 fingerTipTest = matchingTests.First();
 
-                            if (fingerTipTest.Item2)
+                            //Calculate the difference in rotation between the next tracked local rotation and the previous tracked local rotation
+                            Quaternion deltaRotation = currentBone.tracked.localRotation * Quaternion.Inverse(localRotation);
+                            //Convert the difference to an angle on an axis
+                            float angle;
+                            Vector3 axis;
+                            deltaRotation.ToAngleAxis(out angle, out axis);
+                            //Local to world of axis direction
+                            axis = currentBone.tracked.TransformDirection(axis);
+                            //Comparing the axis of the rotation with the forward axis of the current bone (the forward axis
+                            //of the bone is the one it uses to close and open)
+                            bool isClosing = Vector3.Dot(currentBone.tracked.forward, axis) > 0;
+
+                            //If finger tip is colliding with an object and the finger is closing then set the current joint's
+                            //rotation to be the previous frame's
+                            if (fingerTipTest.Item2 && isClosing)
                             {
-                                //Since we've collided with something, we now need to test which way the
-                                //finger is rotating in. If it's rotating towards the collider, stop rotation.
-                                //Or else keep the rotation as is.
-                                
-                                Quaternion deltaRotation = currentBone.tracked.localRotation * Quaternion.Inverse(localRotation);
-                                float angle;
-                                Vector3 axis;
-                                deltaRotation.ToAngleAxis(out angle, out axis);
-                                axis = currentBone.tracked.TransformDirection(axis);
-                                Debug.DrawRay(currentBone.mesh.position, axis * angle, Color.white);
-                                Debug.DrawRay(currentBone.mesh.position, currentBone.tracked.forward, Color.yellow);
-                                if (Vector3.Dot(currentBone.tracked.forward, axis) > 0)
-                                    localRotation = currentBone.tracked.localRotation;
+                                //localRotation = currentBone.tracked.localRotation;
+                                Quaternion meshDelta = currentBone.mesh.localRotation * Quaternion.Inverse(currentBone.startRotation);
+                                float maxAngle = meshDelta.PollAxisAngle(currentBone.tracked.forward, currentBone.tracked.up);
+                                Quaternion preferredAxisRotation = Quaternion.AngleAxis(maxAngle, currentBone.tracked.forward);
+
+                                Quaternion trackedDelta = currentBone.tracked.localRotation * Quaternion.Inverse(currentBone.startRotation);
+                                float currentAngle = meshDelta.PollAxisAngle(currentBone.tracked.forward, currentBone.tracked.up);
+                                Quaternion currentAxisRotation = Quaternion.AngleAxis(currentAngle, currentBone.tracked.forward);
+
+                                Quaternion shiftDelta = currentAxisRotation * Quaternion.Inverse(preferredAxisRotation);
+                                localRotation = currentBone.tracked.localRotation * shiftDelta;
                             }
+
+                            Debug.DrawRay(currentBone.mesh.position, currentBone.tracked.forward * 0.02f, fingerTipTest.Item2 && isClosing ? Color.red : Color.green);
                         }
                         #endregion
-
+                        
                         currentBone.tracked.localRotation = localRotation;
                     }
                 }
@@ -208,7 +222,7 @@ namespace VRPhysicsHands
         private static BoneId GetTip(BoneId currentBoneId)
         {
             BoneId theTip = BoneId.Invalid;
-            if (currentBoneId != BoneId.Hand_End && currentBoneId != BoneId.Hand_ForearmStub && currentBoneId != BoneId.Hand_MaxSkinnable && currentBoneId != BoneId.Hand_Start && currentBoneId != BoneId.Hand_WristRoot && currentBoneId != BoneId.Invalid && currentBoneId != BoneId.Max)
+            if (IsFingerBone(currentBoneId))
             {
                 //var boneNames = Enum.GetNames(typeof(BoneId));
                 string currentBoneName = currentBoneId.ToString();
@@ -221,6 +235,15 @@ namespace VRPhysicsHands
                     theTip = currentBoneId;
             }
             return theTip;
+        }
+        /// <summary>
+        /// Checks whether the given bone id is part of a finger
+        /// </summary>
+        /// <param name="currentBoneId">The bone id to be checked</param>
+        /// <returns>True if the given id is part of a finger, false otherwise</returns>
+        private static bool IsFingerBone(BoneId currentBoneId)
+        {
+            return currentBoneId != BoneId.Hand_End && currentBoneId != BoneId.Hand_ForearmStub && currentBoneId != BoneId.Hand_MaxSkinnable && currentBoneId != BoneId.Hand_Start && currentBoneId != BoneId.Hand_WristRoot && currentBoneId != BoneId.Invalid && currentBoneId != BoneId.Max;
         }
 
         private void SaveStartRotations()
