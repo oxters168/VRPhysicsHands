@@ -38,6 +38,11 @@ namespace VRPhysicsHands
         /// The distance from the finger tips to test for collision before stopping finger rotation
         /// </summary>
         public float tipCollisionDistance = 0.016f;
+        [Tooltip("Specifies how fast and with how much force fingers snap back into place")]
+        /// <summary>
+        /// Changes drive's position spring property in configurable joints
+        /// </summary>
+        public float fingerForce;
         [Tooltip("Lets you manually change finger rotation values in editor if an interface is getting in the way")]
         public bool testFingers;
         public HandBoneValues boneRotationValues;
@@ -186,6 +191,15 @@ namespace VRPhysicsHands
                         {
                             var joint = currentBone.joint;
                             joint.SetTargetRotation(currentBone.tracked.localRotation, currentBone.cachedRotation);
+
+                            JointDrive drive = new JointDrive
+                            {
+                                positionSpring = fingerForce,
+                                maximumForce = Mathf.Infinity
+                            };
+                            joint.xDrive = drive;
+                            joint.yDrive = drive;
+                            joint.zDrive = drive;
                         }
                         else
                         {
