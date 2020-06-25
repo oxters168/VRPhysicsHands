@@ -1327,6 +1327,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3310,6 +3311,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5076,6 +5078,7 @@ MonoBehaviour:
   handAnchor: {fileID: 0}
   trackedRoot: {fileID: 2555740095801660365}
   palm: {fileID: 2587899292107056129}
+  handVisual: {fileID: 4377386253271567184}
   resetOnPositionOffset: 0
   maxPosOffsetValue: 2
   resetOnRotationOffset: 0
@@ -5083,8 +5086,7 @@ MonoBehaviour:
   handInterfaceObject: {fileID: 0}
   flipTipRays: 1
   tipCollisionDistance: 0.016
-  lerpFingers: 0
-  fingersLerpValue: 5
+  fingerForce: 0
   testFingers: 0
   boneRotationValues:
     bones:

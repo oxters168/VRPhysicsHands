@@ -10,13 +10,15 @@ namespace VRPhysicsHands
         private OVRSkeleton.IOVRSkeletonDataProvider DataProvider { get { if (_dataProvider == null) _dataProvider = GetComponent<OVRSkeleton.IOVRSkeletonDataProvider>(); return _dataProvider; } }
         [SerializeField]
         private OVRSkeleton.IOVRSkeletonDataProvider _dataProvider;
+        private bool goodData;
 
         public HandBoneValues GetValues()
         {
             HandBoneValues providedData = default;
 
             var data = DataProvider.GetSkeletonPoseData();
-            if (data.IsDataValid && data.IsDataHighConfidence)
+            goodData = data.IsDataValid && data.IsDataHighConfidence;
+            if (goodData)
             {
                 List<HandBoneValues.BoneRotValue> retrievedData = new List<HandBoneValues.BoneRotValue>();
                 BoneId[] allBoneIds = (BoneId[])System.Enum.GetValues(typeof(BoneId));
@@ -38,6 +40,11 @@ namespace VRPhysicsHands
             }
             
             return providedData;
+        }
+
+        public bool ShowHand()
+        {
+            return goodData;
         }
     }
 }

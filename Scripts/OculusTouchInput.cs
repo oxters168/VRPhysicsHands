@@ -114,6 +114,11 @@ namespace VRPhysicsHands
             return providedData;
         }
 
+        public bool ShowHand()
+        {
+            return true;
+        }
+
         private float[] SpreadValue(float value, int spreadAmount, float minValue = 0, float maxValue = 1)
         {
             float[] splitValues = new float[spreadAmount];

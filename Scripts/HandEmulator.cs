@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityHelpers;
 using System.Linq;
 using System;
@@ -12,6 +12,11 @@ namespace VRPhysicsHands
 
         public Transform trackedRoot;
         public Transform palm;
+        public SkinnedMeshRenderer handVisual;
+        /// <summary>
+        /// True if the hand is currently visible and interactable, false otherwise
+        /// </summary>
+        public bool isVisible { get; private set; }
 
         [Space(10), Tooltip("If set to true, will snap to tracked position and rotation when max positional offset reached")]
         public bool resetOnPositionOffset;
@@ -72,14 +77,21 @@ namespace VRPhysicsHands
         }
         void Update()
         {
-            if (handInterface != null && !testFingers)
-                boneRotationValues = handInterface.GetValues();
+            if (handInterface != null)
+            {
+                SetVisibility(handInterface.ShowHand());
+                if (!testFingers)
+                    boneRotationValues = handInterface.GetValues();
+            }
 
-            SetTracked();
-            SetPhysics();
+            if (isVisible)
+            {
+                SetTracked();
+                SetPhysics();
 
-            if ((resetOnPositionOffset && wristPosOffset > maxPosOffsetValue) || (resetOnRotationOffset && wristRotOffset > maxRotOffsetValue))
-                SnapToTracked();
+                if ((resetOnPositionOffset && wristPosOffset > maxPosOffsetValue) || (resetOnRotationOffset && wristRotOffset > maxRotOffsetValue))
+                    SnapToTracked();
+            }
         }
 
         private void SetTracked()
@@ -225,6 +237,22 @@ namespace VRPhysicsHands
                     currentBone.mesh.position = currentBone.physics.transform.position;
                     currentBone.mesh.rotation = currentBone.physics.transform.rotation;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Makes the hand invisible and uninteractable when set to false
+        /// and visible and interactable when set to true
+        /// </summary>
+        /// <param name="onOff">The toggle value</param>
+        public void SetVisibility(bool onOff)
+        {
+            isVisible = onOff;
+            handVisual.enabled = onOff;
+            var colliders = GetComponentsInChildren<Collider>();
+            foreach (var collider in colliders)
+            {
+                collider.enabled = onOff;
             }
         }
 
