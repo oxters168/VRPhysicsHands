@@ -10,6 +10,17 @@ namespace VRPhysicsHands
         private OVRSkeleton.IOVRSkeletonDataProvider DataProvider { get { if (_dataProvider == null) _dataProvider = GetComponent<OVRSkeleton.IOVRSkeletonDataProvider>(); return _dataProvider; } }
         [SerializeField]
         private OVRSkeleton.IOVRSkeletonDataProvider _dataProvider;
+
+        /// <summary>
+        /// Will request hand to be hidden if provided data is not valid
+        /// </summary>
+        [Tooltip("Will request hand to be hidden if provided data is not valid")]
+        public bool hideWhenDataIsNotValid = true;
+        /// <summary>
+        /// Will request hand to be hidden if provided data is not high confidence
+        /// </summary>
+        [Tooltip("Will request hand to be hidden if provided data is not high confidence")]
+        public bool hideWhenDataIsNotHighConfidence = true;
         private bool goodData;
 
         public HandBoneValues GetValues()
@@ -17,7 +28,7 @@ namespace VRPhysicsHands
             HandBoneValues providedData = default;
 
             var data = DataProvider.GetSkeletonPoseData();
-            goodData = data.IsDataValid && data.IsDataHighConfidence;
+            goodData = (!hideWhenDataIsNotValid || data.IsDataValid) && (!hideWhenDataIsNotHighConfidence || data.IsDataHighConfidence);
             if (goodData)
             {
                 List<HandBoneValues.BoneRotValue> retrievedData = new List<HandBoneValues.BoneRotValue>();

@@ -16,7 +16,13 @@ namespace VRPhysicsHands
         /// <summary>
         /// True if the hand is currently visible and interactable, false otherwise
         /// </summary>
-        public bool isVisible { get; private set; }
+        public bool isVisible { get { return _isVisible; } private set { _isVisible = value; } }
+        private bool _isVisible = true;
+        /// <summary>
+        /// If set to true, then the connected interface has the ability to hide the hand (for the hand tracking iput, this means when the data is low confidence)
+        /// </summary>
+        [Space(10), Tooltip("If set to true, then the connected interface has the ability to hide the hand (for the hand tracking iput, this means when the data is low confidence)")]
+        public bool hideWithInterface = true;
 
         [Space(10), Tooltip("If set to true, will snap to tracked position and rotation when max positional offset reached")]
         public bool resetOnPositionOffset;
@@ -79,7 +85,8 @@ namespace VRPhysicsHands
         {
             if (handInterface != null)
             {
-                SetVisibility(handInterface.ShowHand());
+                if (hideWithInterface)
+                    SetVisibility(handInterface.ShowHand());
                 if (!testFingers)
                     boneRotationValues = handInterface.GetValues();
             }
